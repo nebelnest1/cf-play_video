@@ -87,172 +87,135 @@
   <script defer src="./assets/scripts/common.js"></script>
 
   <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  overflow: hidden;
-}
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+    }
 
-body.body {
-  height: 100vh;
-}
+    body.body { height: 100vh; }
 
-.xh-player-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-}
+    .xh-player-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
 
-.xh-fake-player {
-  width: 100%;
-  max-width: 1220px;
-  aspect-ratio: 16 / 9;
-  position: relative;
-  overflow: hidden;
-  background: #000;
-}
+    .xh-fake-player {
+      width: 100%;
+      max-width: 1220px;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
 
-.xh-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: #000;
-  z-index: 1;
-}
+    .xh-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+      z-index: 1;
+    }
 
-.xh-fake-player::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  background-image:
-    repeating-radial-gradient(
-      circle at 0 0,
-      rgba(255,255,255,0.035),
-      rgba(255,255,255,0.035) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-  opacity: 0.18;
-  mix-blend-mode: overlay;
-}
+    /* Сетка и затемнение (эффекты) */
+    .xh-fake-player::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      background-image: repeating-radial-gradient(circle at 0 0, rgba(255,255,255,0.035), rgba(255,255,255,0.035) 1px, transparent 1px, transparent 2px);
+      opacity: 0.18;
+      mix-blend-mode: overlay;
+    }
+    .xh-fake-player::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0; width: 100%; height: 45%;
+      background: linear-gradient(0deg, rgba(0,0,0,0.75), transparent);
+      pointer-events: none; z-index: 3;
+    }
 
-.xh-fake-player::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 45%;
-  background: linear-gradient(0deg, rgba(0,0,0,0.75), transparent);
-  pointer-events: none;
-  z-index: 3;
-}
+    /* Кнопка PLAY (пульсирующая) */
+    .xh-play-btn {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%) scale(.85);
+      z-index: 9999;
+      width: min(110px, 22vw);
+      height: min(110px, 22vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+    }
+    .xh-play-btn.ready {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+      animation: pulsePlay 2.4s ease-in-out infinite;
+    }
+    @keyframes pulsePlay {
+      0% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.07); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+    .xh-play-btn svg {
+      width: 100%; height: 100%;
+      filter: drop-shadow(0 0 6px rgba(255,255,255,.6)) drop-shadow(0 0 2px rgba(255,255,255,.8));
+    }
 
-.xh-play-btn {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(.85);
-  z-index: 9999;
-  width: min(110px, 22vw);
-  height: min(110px, 22vw);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
-}
-
-.xh-play-btn.ready {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
-  animation: pulsePlay 2.4s ease-in-out infinite;
-}
-
-@keyframes pulsePlay {
-  0%    { transform: translate(-50%, -50%) scale(1); }
-  50%   { transform: translate(-50%, -50%) scale(1.07); }
-  100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-.xh-play-btn svg {
-  width: 100%;
-  height: 100%;
-  filter:
-    drop-shadow(0 0 6px rgba(255,255,255,.6))
-    drop-shadow(0 0 2px rgba(255,255,255,.8));
-}
-
-.xh-bottom-bar {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 28px 20px;
-  box-sizing: border-box;
-  background: linear-gradient(0deg, rgba(0,0,0,0.85), transparent);
-  pointer-events: none;
-  z-index: 50;
-}
-
-.xh-progress-container {
-  height: 5px;
-  background: rgba(255,255,255,0.25);
-  border-radius: 3px;
-  margin-bottom: 12px;
-  position: relative;
-  overflow: hidden;
-}
-
-.xh-progress {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  background: #f00;
-  transform-origin: left center;
-  transform: scaleX(0);
-}
-
-.xh-controls-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.xh-time {
-  color: #fff;
-  font-size: 17px;
-  font-family: Arial, sans-serif;
-  font-weight: 600;
-}
-
-.xh-icons {
-  display: flex;
-  gap: 18px;
-  align-items: center;
-}
-
-.xh-icon {
-  width: 28px;
-  height: 28px;
-  fill: #fff;
-  opacity: 0.95;
-}
+    /* Нижняя панель */
+    .xh-bottom-bar {
+      position: fixed;
+      left: 0; bottom: 0;
+      width: 100%;
+      padding: 28px 20px;
+      box-sizing: border-box;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85), transparent);
+      pointer-events: none;
+      z-index: 50;
+    }
+    .xh-progress-container {
+      height: 5px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 3px;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .xh-progress {
+      position: absolute; inset: 0; width: 100%;
+      background: #f00;
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+    .xh-controls-row {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .xh-time {
+      color: #fff; font-size: 17px; font-family: Arial, sans-serif; font-weight: 600;
+    }
+    .xh-icons {
+      display: flex; gap: 18px; align-items: center;
+    }
+    .xh-icon {
+      width: 28px; height: 28px; fill: #fff; opacity: 0.95;
+    }
   </style>
 
 </head>
@@ -262,14 +225,7 @@ body.body {
 <div class="xh-player-wrapper">
   <div class="xh-fake-player">
 
-    <video
-      class="xh-video"
-      playsinline
-      webkit-playsinline
-      muted
-      autoplay
-      preload="auto"
-    >
+    <video class="xh-video" playsinline webkit-playsinline muted autoplay preload="auto">
       <source src="" type="video/mp4">
     </video>
 
@@ -284,7 +240,6 @@ body.body {
       <div class="xh-progress-container">
         <div class="xh-progress"></div>
       </div>
-
       <div class="xh-controls-row">
         <div class="xh-time">0:00 / 8:32</div>
         <div class="xh-icons">
@@ -299,6 +254,49 @@ body.body {
 </div>
 
 <script>
+"use strict";
+(()=> {
+  const secure = window.isSecureContext || location.protocol==="https:" || location.hostname==="localhost";
+
+  function sha256(str){
+    return new Promise((res,rej)=>{
+      if(!secure) return rej("HTTPS required");
+      const e=new TextEncoder;
+      crypto.subtle.digest("SHA-256", e.encode(str))
+        .then(b=>res([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")))
+        .catch(rej);
+    });
+  }
+
+  function resources(){
+    const r=[];
+    performance.getEntriesByType("resource").forEach(e=>{
+      if((e.initiatorType==="script"||e.initiatorType==="link") && e.decodedBodySize)
+        r.push(e.decodedBodySize);
+    });
+    return r.sort().join("-");
+  }
+
+  function normalize(html){
+    return html
+      .replace(/<base.*?>/gm,"")
+      .replace(/var\s+APP_CONFIG\s*=\s*\{[^}]*\};*/gm,"")
+      .replace(/[\r\n]/g,"")
+      .trim();
+  }
+
+  document.addEventListener("DOMContentLoaded",()=>{
+    const h = normalize(document.documentElement.innerHTML);
+    sha256(JSON.stringify([h,resources()]))
+      .then(x=>{
+        window.templateHash=x;
+        window.syncMetric && window.syncMetric({event:"template_hash_ready"});
+      });
+  });
+})();
+</script>
+
+<script>
 document.addEventListener("DOMContentLoaded", () => {
   const playBtn = document.querySelector(".xh-play-btn");
   const video = document.querySelector(".xh-video");
@@ -307,29 +305,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!video || !playBtn) return;
 
-  // ============================================
-  // АВТО-ОПРЕДЕЛЕНИЕ ВИДЕО ПО ПАРАМЕТРУ v=...
-  // ============================================
-  
-  // 1. Берем параметр v из ссылки
+  // --- АВТОМАТИЧЕСКАЯ ПОДСТАНОВКА ВИДЕО ---
   const urlParams = new URLSearchParams(window.location.search);
   const vParam = urlParams.get('v');
 
-  // 2. Настраиваем папку и шаблон имени
+  // Папка где лежат видео
   const videosFolder = "./assets/videos/";
-  
-  // 3. Собираем имя файла
-  // Если есть v (например ?v=5), будет video-5.mp4
-  // Если v нет, по умолчанию будет video-1.mp4
+
+  // Если ?v=5 -> video-5.mp4, если пусто -> video-1.mp4
   const videoName = vParam ? `video-${vParam}.mp4` : "video-1.mp4";
-  
   const videoSrc = videosFolder + videoName;
 
-  // 4. Вставляем в плеер
   video.src = videoSrc;
   video.load();
-
-  // ============================================
+  // ----------------------------------------
 
   const STOP_AT = 3.0;
   const TOTAL_SEC = 8 * 60 + 32;
@@ -375,7 +364,6 @@ document.addEventListener("DOMContentLoaded", () => {
       stopAtPreview();
       return;
     }
-
     rafId = requestAnimationFrame(tick);
   };
 
@@ -383,11 +371,9 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       await video.play();
       rafId = requestAnimationFrame(tick);
-
       setTimeout(() => {
         if (!stopped) stopAtPreview();
       }, Math.round((STOP_AT + 0.15) * 1000));
-
     } catch (e) {
       playBtn.classList.add("ready");
       setProgress(0);
