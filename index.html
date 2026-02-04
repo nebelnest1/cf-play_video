@@ -1,0 +1,411 @@
+<!doctype html>
+<html data-version="production-archive-v0.0.123" data-landing-name="player" lang="">
+<head>
+
+  <script>
+  var APP_CONFIG = {
+    domain: "https://jup9.com",
+    mainExit_currentTab_zoneId: 10217421,
+    mainExit_newTab_zoneId: 10217420,
+    autoexit_zoneId: 10217422,
+    autoexit_timeToRedirect: 90,
+    reverse_zoneId: 10217419,
+    back_zoneId: 10217423,
+    back_count: 8
+  };
+  </script>
+
+  <script>
+  "use strict";
+  (() => {
+    const now = () => {
+      const d = new Date();
+      return `${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,"0")}-${String(d.getUTCDate()).padStart(2,"0")} `
+        + `${String(d.getUTCHours()).padStart(2,"0")}:${String(d.getUTCMinutes()).padStart(2,"0")}:${String(d.getUTCSeconds()).padStart(2,"0")}.`
+        + `${String(d.getUTCMilliseconds()*1000).padStart(6,"0")} +00:00`;
+    };
+
+    const p = new URL(location.href).searchParams;
+    const s = {
+      var_1: p.get("var_1") ?? "",
+      var_2: p.get("var_2") ?? "",
+      var_3: p.get("var_3") ?? "",
+      abtest: p.get("abtest") ?? ""
+    };
+
+    function send(data) {
+      const url = new URL("https://wuytl.com/sync-metrics");
+      navigator.sendBeacon && navigator.sendBeacon(url.toString(), JSON.stringify(data));
+    }
+
+    window.syncMetric = ({ event, exitZoneId, errorMessage }) => {
+      const html = document.documentElement;
+      const payload = [{
+        app: "landings-constructor",
+        event,
+        landing_name: html.getAttribute("data-landing-name") || "",
+        build_version: html.getAttribute("data-version") || "",
+        landing_domain: location.host,
+        landing_url: location.href,
+        exit_zone_id: exitZoneId ? Number(exitZoneId) : undefined,
+        template_hash: window.templateHash || "",
+        request_var: s.var_3,
+        source_zone_id: isNaN(Number(s.var_2)) ? null : Number(s.var_2),
+        sub_id: s.var_1,
+        landing_load_date_time: now(),
+        error_message: errorMessage || "",
+        ab2r: s.abtest || String(APP_CONFIG.abtest || "")
+      }];
+
+      if (APP_CONFIG.isAnalyticEnabled !== false) send(payload);
+    };
+
+    window.syncMetric({ event: "start" });
+  })();
+  </script>
+
+  <script>
+  "use strict";
+  (() => {
+    const m = window.syncMetric;
+    if (!m) return;
+    addEventListener("error", e => m({ event:"error", errorMessage:e.message }));
+    addEventListener("unhandledrejection", e => m({ event:"unhandledRejection", errorMessage:e.reason }));
+  })();
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+
+  <title>LEAKED Homemade Tapes 2025 | Real Ex-GF Revenge 🔥</title>
+  <meta name="description" content="Continue watching" />
+
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="./assets/favicon/favicon-play.png">
+  <link rel="manifest" href="./assets/favicon/site.webmanifest" />
+
+  <script defer src="./assets/scripts/common.js"></script>
+
+  <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+body.body {
+  height: 100vh;
+}
+
+.xh-player-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.xh-fake-player {
+  width: 100%;
+  max-width: 1220px;
+  aspect-ratio: 16 / 9;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.xh-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  z-index: 1;
+}
+
+.xh-fake-player::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background-image:
+    repeating-radial-gradient(
+      circle at 0 0,
+      rgba(255,255,255,0.035),
+      rgba(255,255,255,0.035) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  opacity: 0.18;
+  mix-blend-mode: overlay;
+}
+
+.xh-fake-player::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 45%;
+  background: linear-gradient(0deg, rgba(0,0,0,0.75), transparent);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.xh-play-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(.85);
+  z-index: 9999;
+  width: min(110px, 22vw);
+  height: min(110px, 22vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+}
+
+.xh-play-btn.ready {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+  animation: pulsePlay 2.4s ease-in-out infinite;
+}
+
+@keyframes pulsePlay {
+  0%    { transform: translate(-50%, -50%) scale(1); }
+  50%   { transform: translate(-50%, -50%) scale(1.07); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.xh-play-btn svg {
+  width: 100%;
+  height: 100%;
+  filter:
+    drop-shadow(0 0 6px rgba(255,255,255,.6))
+    drop-shadow(0 0 2px rgba(255,255,255,.8));
+}
+
+.xh-bottom-bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 28px 20px;
+  box-sizing: border-box;
+  background: linear-gradient(0deg, rgba(0,0,0,0.85), transparent);
+  pointer-events: none;
+  z-index: 50;
+}
+
+.xh-progress-container {
+  height: 5px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 3px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.xh-progress {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: #f00;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.xh-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.xh-time {
+  color: #fff;
+  font-size: 17px;
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+}
+
+.xh-icons {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.xh-icon {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+  opacity: 0.95;
+}
+  </style>
+
+</head>
+
+<body class="body">
+
+<div class="xh-player-wrapper">
+  <div class="xh-fake-player">
+
+    <video
+      class="xh-video"
+      playsinline
+      webkit-playsinline
+      muted
+      autoplay
+      preload="auto"
+    >
+      <source src="" type="video/mp4">
+    </video>
+
+    <div class="xh-play-btn">
+      <svg viewBox="0 0 140 140">
+        <circle cx="70" cy="70" r="66" stroke="white" stroke-width="6" fill="rgba(0,0,0,0.40)"/>
+        <polygon points="55,40 105,70 55,100" fill="white"/>
+      </svg>
+    </div>
+
+    <div class="xh-bottom-bar">
+      <div class="xh-progress-container">
+        <div class="xh-progress"></div>
+      </div>
+
+      <div class="xh-controls-row">
+        <div class="xh-time">0:00 / 8:32</div>
+        <div class="xh-icons">
+          <svg class="xh-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3z"/></svg>
+          <svg class="xh-icon" viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zM14 5v2h3v3h2V5h-5z"/></svg>
+          <svg class="xh-icon" viewBox="0 0 24 24"><circle cx="12" cy="6" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="18" r="2"/></svg>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const playBtn = document.querySelector(".xh-play-btn");
+  const video = document.querySelector(".xh-video");
+  const progress = document.querySelector(".xh-progress");
+  const timeDisplay = document.querySelector(".xh-time");
+
+  if (!video || !playBtn) return;
+
+  // ============================================
+  // АВТО-ОПРЕДЕЛЕНИЕ ВИДЕО ПО ПАРАМЕТРУ v=...
+  // ============================================
+  
+  // 1. Берем параметр v из ссылки
+  const urlParams = new URLSearchParams(window.location.search);
+  const vParam = urlParams.get('v');
+
+  // 2. Настраиваем папку и шаблон имени
+  const videosFolder = "./assets/videos/";
+  
+  // 3. Собираем имя файла
+  // Если есть v (например ?v=5), будет video-5.mp4
+  // Если v нет, по умолчанию будет video-1.mp4
+  const videoName = vParam ? `video-${vParam}.mp4` : "video-1.mp4";
+  
+  const videoSrc = videosFolder + videoName;
+
+  // 4. Вставляем в плеер
+  video.src = videoSrc;
+  video.load();
+
+  // ============================================
+
+  const STOP_AT = 3.0;
+  const TOTAL_SEC = 8 * 60 + 32;
+  const MIN_VISIBLE = 0.02;
+
+  let stopped = false;
+  let rafId = 0;
+
+  const fmt = (s) => {
+    const mm = Math.floor(s / 60);
+    const ss = Math.floor(s % 60).toString().padStart(2, "0");
+    return `${mm}:${ss}`;
+  };
+
+  const setProgress = (t) => {
+    const tt = Math.max(0, t);
+    const realP = tt / TOTAL_SEC;
+    const p = Math.max(0, Math.min(1, Math.max(realP, tt > 0 ? MIN_VISIBLE : 0)));
+
+    if (progress) progress.style.transform = `scaleX(${p})`;
+    if (timeDisplay) timeDisplay.textContent = `${fmt(tt)} / 8:32`;
+  };
+
+  const stopAtPreview = () => {
+    if (stopped) return;
+    stopped = true;
+
+    try { video.pause(); } catch {}
+    try { video.currentTime = STOP_AT; } catch {}
+
+    cancelAnimationFrame(rafId);
+    setProgress(STOP_AT);
+    playBtn.classList.add("ready");
+
+    window.syncMetric && window.syncMetric({ event: "video_preview_stopped" });
+  };
+
+  const tick = () => {
+    if (stopped) return;
+    setProgress(video.currentTime || 0);
+
+    if ((video.currentTime || 0) >= STOP_AT) {
+      stopAtPreview();
+      return;
+    }
+
+    rafId = requestAnimationFrame(tick);
+  };
+
+  const tryAutoplay = async () => {
+    try {
+      await video.play();
+      rafId = requestAnimationFrame(tick);
+
+      setTimeout(() => {
+        if (!stopped) stopAtPreview();
+      }, Math.round((STOP_AT + 0.15) * 1000));
+
+    } catch (e) {
+      playBtn.classList.add("ready");
+      setProgress(0);
+    }
+  };
+
+  video.addEventListener("pause", () => {
+    if (!stopped) {
+      stopped = true;
+      cancelAnimationFrame(rafId);
+      setProgress(video.currentTime || 0);
+      playBtn.classList.add("ready");
+    }
+  }, { once: true });
+
+  tryAutoplay();
+});
+</script>
+
+</body>
+</html>
